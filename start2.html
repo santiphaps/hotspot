@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<title>HOTSPOT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+<header class="w3-container w3-red">
+  <h1>Hot Spot</h1>
+</header>
+<div ng-app="myApp" ng-controller="dataCtrl">
+  <button ng-click="tweet()" class="w3-button w3-round-xlarge w3-black w3-hover-orange">Tweet</button>
+  <br>
+  <p class="w3-panel w3-blue"> Date: {{currentDate | date: 'dd, MMMM yyyy'}} Time: {{currentDate | date: 'HH:mm:ss'}}</p>
+  <article class="w3-container">
+
+    <p class="w3-panel w3-cyan" id="location">Latitude: {{myLat}} | Longitude: {{myLng}} | Temp: {{myWeather.main.temp}} C | {{myWeather.name}} | {{myWeather.sys.country}}</p>
+    <img src="{{map_url}}" width="100%" id="image_map"></img>
+  </article>
+ 
+</div>
+<footer class="w3-container w3-teal">
+  <h5>Created by Nick S.</h5>
+</footer>
+<script src="nearby2.js"></script>
+</body>
+</html>
