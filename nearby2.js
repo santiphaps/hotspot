@@ -8,6 +8,7 @@ var googleplace_url="https://maps.googleapis.com/maps/api/place/nearbysearch/jso
 var googleplace_query = "";
 var openweathermap_query="";
 var googlepubsubtopic_url = "https://pubsub.googleapis.com/v1/projects/elevated-disk-193107/topics/testState:publish?key=AIzaSyCxVmJ5c2pmquUu4gqxRSpPdH5A5o-r5es";
+var awssnstopic_url = "https://pubsub.googleapis.com/v1/projects/elevated-disk-193107/topics/testState:publish?key=AIzaSyCxVmJ5c2pmquUu4gqxRSpPdH5A5o-r5es";
 var myLat, myLng, myTemp, myCity, myCountry;
 var app = angular.module('myApp', []);
 app.controller('dataCtrl', function($scope, $http) {
@@ -35,7 +36,7 @@ app.controller('dataCtrl', function($scope, $http) {
           alert("Please allow location");
       
       };
-    $scope.tweet = function($scope){
+    $scope.tweetgcp = function(){
         var clicktimestamp = new Date();
         var mytime = clicktimestamp.toString();
         var messagedata = window.btoa("Time: " + mytime);
@@ -53,11 +54,43 @@ app.controller('dataCtrl', function($scope, $http) {
             data: messagedata }
         
         ] };
+        $scope.gcptweettime = mytime;
         $http.post(googlepubsubtopic_url,params)
         .then(function(response){
-            alert("Message:" + JSON.stringify(response.data));
+            $scope.gcpresult = "Success";
+            $scope.gcpmessageid = response.data.messageIds[0];
+
         },function(errormsg){
-            alert(JSON.stringify(errormsg.data));
+            $scope.gcpresult = JSON.stringify(errormsg.data);
+        });
+
+    };
+    $scope.tweetaws = function(){
+        var clicktimestamp = new Date();
+        var mytime = clicktimestamp.toString();
+        var messagedata = window.btoa("Time: " + mytime);
+        var params = { messages: [
+             
+            { 
+            attributes: {
+                Latitude : myLat.toString(),
+                Longitude : myLng.toString(),
+                City : myCity,
+                Country : myCountry,
+                Temperature: myTemp.toString()
+            }, 
+             
+            data: messagedata }
+        
+        ] };
+        $scope.gcptweettime = mytime;
+        $http.post(awssnstopic_url,params)
+        .then(function(response){
+            $scope.gcpresult = "Success";
+            $scope.gcpmessageid = response.data.messageIds[0];
+            
+        },function(errormsg){
+            $scope.gcpresult = JSON.stringify(errormsg.data);
 
         });
 

@@ -4,20 +4,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<body>
-<header class="w3-container w3-red">
-  <h1>Hot Spot</h1>
-</header>
+<body class="w3-half">
 <div ng-app="myApp" ng-controller="dataCtrl">
-  <button ng-click="tweet()" class="w3-button w3-round-xlarge w3-black w3-hover-orange">Tweet</button>
-  <br>
-  <p class="w3-panel w3-blue"> Date: {{currentDate | date: 'dd, MMMM yyyy'}} Time: {{currentDate | date: 'HH:mm:ss'}}</p>
-  <article class="w3-container">
-
-    <p class="w3-panel w3-cyan" id="location">Latitude: {{myLat}} | Longitude: {{myLng}} | Temp: {{myWeather.main.temp}} C | {{myWeather.name}} | {{myWeather.sys.country}}</p>
-    <img src="{{map_url}}" width="100%" id="image_map"></img>
-  </article>
- 
+   <div class="w3-card-4">
+    <header class="w3-container w3-blue"><h2>{{myWeather.name}} | {{myWeather.sys.country}} | {{myWeather.main.temp}} C</h2></header>
+    <p class="w3-xlarge"><img src="http://openweathermap.org/img/w/{{myWeather.weather[0].icon}}.png"> {{myWeather.weather[0].description}} </p>
+    <footer class="w3-tiny">Date: {{currentDate | date: 'dd, MMMM yyyy'}} Time: {{currentDate | date: 'HH:mm:ss'}} / Latitude: {{myLat}} | Longitude: {{myLng}}</footer>
+  </div>
+  <p class=w3-panel><button ng-click="tweetgcp()" class="w3-button w3-circle w3-blue w3-hover-teal">+</button>
+    GCP | {{gcpresult}} : {{gcpmessageid}} : {{gcptweettime}}</p> 
+  
+  <p class=w3-panel><button ng-click="tweetaws()" class="w3-button w3-circle w3-yellow w3-hover-teal">+</button>
+    AWS | {{gcpresult}} : {{gcpmessageid}} : {{gcptweettime}}</p>
+  <img src="{{map_url}}" width="100%" id="image_map">
+  
 </div>
 <footer class="w3-container w3-teal">
   <h5>Created by Nick S.</h5>
