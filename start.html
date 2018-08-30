@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
 <title>HOTSPOT</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<body>
-
-<header class="w3-container w3-red">
-  <h1>Nearby Places</h1>
-</header>
-<article class="w3-container">
-  <p class="w3-panel w3-cyan" id="location"></p>
-  <img src="" width="100%" id="image_map">
-</article>
-
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body class="w3-half">
+<div ng-app="myApp" ng-controller="dataCtrl">
+   <div class="w3-card-4">
+    <header class="w3-container w3-blue"><h2>{{myWeather.name}} | {{myWeather.sys.country}} | {{myWeather.main.temp}} C</h2></header>
+    <p class="w3-xlarge"><img src="http://openweathermap.org/img/w/{{myWeather.weather[0].icon}}.png"> {{myWeather.weather[0].description}} </p>
+    <footer class="w3-tiny">Date: {{currentDate | date: 'dd, MMMM yyyy'}} Time: {{currentDate | date: 'HH:mm:ss'}} / Latitude: {{myLat}} | Longitude: {{myLng}}</footer>
+  </div>
+  <p class=w3-panel><button ng-click="tweetgcp()" class="w3-button w3-circle w3-blue w3-hover-teal">+</button>
+    GCP | {{gcpresult}} : {{gcpmessageid}} : {{gcptweettime}}</p> 
+  
+  <p class=w3-panel><button ng-click="tweetaws()" class="w3-button w3-circle w3-yellow w3-hover-teal">+</button>
+    AWS | {{gcpresult}} : {{gcpmessageid}} : {{gcptweettime}}</p>
+  <img src="{{map_url}}" width="100%" id="image_map">
+  
+</div>
 <footer class="w3-container w3-teal">
-  <h5>Created by Nick/S</h5>
+  <h5>Created by Nick S.</h5>
 </footer>
 <script src="nearby2.js"></script>
 </body>
